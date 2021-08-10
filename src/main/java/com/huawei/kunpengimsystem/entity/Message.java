@@ -1,0 +1,52 @@
+package com.huawei.kunpengimsystem.entity;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.util.Date;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Message implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 主键
+     */
+    private Long id;
+
+    /**
+     * 外键 对话的id
+     */
+    private Long conversationId;
+
+    /**
+     * 外键 发送用户的id
+     */
+    private Long senderId;
+
+    /**
+     * 信息的类型：text，photo，file
+     */
+    private String messageType;
+
+    /**
+     * 信息内容
+     */
+    private String messageContext;
+
+    /**
+     * 信息创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 信息删除时间
+     */
+    private Date deleteTime;
+}
