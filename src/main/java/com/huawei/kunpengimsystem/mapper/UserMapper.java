@@ -3,7 +3,6 @@ package com.huawei.kunpengimsystem.mapper;
 import com.huawei.kunpengimsystem.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,7 +15,6 @@ public interface UserMapper {
      *
      * @return 用户列表
      */
-    @Select("SELECT * FROM users")
     List<User> selectAllUser();
 
     /**
@@ -25,7 +23,6 @@ public interface UserMapper {
      * @param id 主键id
      * @return 当前id的用户，不存在则是{@code null}
      */
-    @Select("SELECT * FROM users WHERE id = #{id}")
     User selectUserById(@Param("id") Long id);
 
     /**
@@ -34,7 +31,7 @@ public interface UserMapper {
      * @param user 用户
      * @return 成功 - {@code 1} 失败- {@code 0}
      */
-    int saveUser(@Param("user") User user);
+    int createUser(@Param("user") User user);
 
     /**
      * 删除用户
