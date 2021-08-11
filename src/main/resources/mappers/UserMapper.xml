@@ -16,7 +16,7 @@
         `password`,
         `gender`,
         `email`,
-        `create_time`)
+        `created_at`)
         VALUES (#{user.name},
         #{user.password},
         #{user.gender},

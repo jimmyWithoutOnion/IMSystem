@@ -26,7 +26,7 @@ public interface UserMapper {
     User selectUserById(@Param("id") Long id);
 
     /**
-     * 保存用户
+     * 新建用户
      *
      * @param user 用户
      * @return 成功 - {@code 1} 失败- {@code 0}
