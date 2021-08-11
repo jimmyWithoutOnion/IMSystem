@@ -4,7 +4,7 @@ USE im_system;
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE IF NOT EXISTS users (
-    id INT(11) NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(32) NOT NUll UNIQUE,
     password VARCHAR(32) NOT NULL,
     gender ENUM('male', 'female') NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS users (
 
 DROP TABLE IF EXISTS contacts;
 CREATE TABLE IF NOT EXISTS contacts (
-    id INT(11) NOT NULL,
+    id INT NOT NULL,
     name VARCHAR(32) NOT NULL,
     email VARCHAR(32) NOT NULL,
     created_at TIMESTAMP NOT NULL,
@@ -24,8 +24,8 @@ CREATE TABLE IF NOT EXISTS contacts (
 
 DROP TABLE IF EXISTS user_contact;
 CREATE TABLE IF NOT EXISTS user_contact (
-    user_id INT(11) NOT NULL,
-    contact_id INT(11) NOT NULL,
+    user_id INT NOT NULL,
+    contact_id INT NOT NULL,
     name VARCHAR(32) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     PRIMARY KEY (user_id, contact_id),
@@ -37,21 +37,21 @@ CREATE TABLE IF NOT EXISTS user_contact (
 
 DROP TABLE IF EXISTS conversations;
 CREATE TABLE IF NOT EXISTS conversations (
-    id INT(11) NOT NULL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(32) NOT NULL,
-    creator_id INT(32) NOT NULL,
+    creator_id INT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     deleted_at TIMESTAMP,
     PRIMARY KEY (id),
     FOREIGN KEY (creator_id)
-        REFERENCES users(id),
+        REFERENCES users(id)
 )ENGINE=InnoDB;
 
 DROP TABLE IF EXISTS participants;
 CREATE TABLE IF NOT EXISTS participants (
-    id INT(11) NOT NULL AUTO_INCREMENT,
-    conversation_id INT(11) NOT NULL,
-    user_id INT(11) NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
+    conversation_id INT NOT NULL,
+    user_id INT NOT NULL,
     type ENUM('single', 'group') NOT NULL,
     created_at TIMESTAMP NOT NULL,
     PRIMARY KEY (id),
@@ -63,9 +63,9 @@ CREATE TABLE IF NOT EXISTS participants (
 
 DROP TABLE IF EXISTS messages;
 CREATE TABLE IF NOT EXISTS messages (
-    id INT(11) NOT NULL AUTO_INCREMENT,
-    conversation_id INT(11) NOT NULL,
-    sender_id INT(11) NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
+    conversation_id INT NOT NULL,
+    sender_id INT NOT NULL,
     messages_type ENUM('text', 'file', 'photo') NOT NULL,
     message VARCHAR(255) NOT NULL DEFAULT '',
     created_at TIMESTAMP NOT NULL,
@@ -79,8 +79,8 @@ CREATE TABLE IF NOT EXISTS messages (
 
 DROP TABLE IF EXISTS attachments;
 CREATE TABLE IF NOT EXISTS attachments (
-    id INT(11) NOT NULL AUTO_INCREMENT,
-    message_id INT(11) NOT NULL,
+    id INT NOT NULL AUTO_INCREMENT,
+    message_id INT NOT NULL,
     file_url VARCHAR(40) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     PRIMARY KEY (id),
