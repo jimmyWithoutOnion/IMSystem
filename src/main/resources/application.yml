@@ -33,4 +33,4 @@ mybatis:
     # 下划线转驼峰
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mappers/*.xml
-  type-aliases-package: com.huawei.orm.mybatis.entity
+  type-aliases-package: com.huawei.kunpengimsystem.entity
