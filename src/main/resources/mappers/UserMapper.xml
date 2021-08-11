@@ -8,7 +8,7 @@
 
     <select id="selectUserById" parameterType="int" resultType="User">
         SELECT * FROM `users`
-        WHERE id = #{id}")
+        WHERE `id` = #{id}")
     </select>
 
     <insert id="createUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">

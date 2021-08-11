@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
     password VARCHAR(32) NOT NULL,
     gender ENUM('male', 'female') NOT NULL,
     email VARCHAR(32) NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.kunpengimsystem.mapper.UserContactMapper">
+
+    <select id="selectAllUserContact">
+        SELECT * FROM `user_contact`
+    </select>
+
+    <select id="selectUserContactByUserId">
+        SELECT * FROM `user_contact`
+        WHERE `user_id` = #{userId}")
+    </select>
+
+    <insert id="createUser" parameterType="UserContact">
+        INSERT INTO `user_contact` (`user_id`,
+        `contact_id`,
+        `name`,
+        `created_at`)
+        VALUES (#{userContact.userId},
+        #{userContact.contactId},
+        #{userContact.name},
+        #{userContact.createTime})
+    </insert>
+
+    <delete id="deleteById">
+        DELETE
+        FROM `user_contact`
+        WHERE `id` = #{id}
+    </delete>
+</mapper>
