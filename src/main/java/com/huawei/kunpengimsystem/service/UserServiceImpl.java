@@ -2,11 +2,15 @@ package com.huawei.kunpengimsystem.service;
 
 import com.huawei.kunpengimsystem.entity.User;
 import com.huawei.kunpengimsystem.mapper.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.Resource;
 
+@Service("UserService")
+@Transactional
 public class UserServiceImpl implements UserService {
-    @Resource(name = "UserMapper")
+    @Autowired
     private UserMapper userMapper;
 
     @Override
