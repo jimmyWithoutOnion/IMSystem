@@ -28,7 +28,7 @@ public class Attachment implements Serializable {
     /**
      * 文件的地址
      */
-    private String fileURL;
+    private String fileAddress;
 
     /**
      * 文件创建的时间

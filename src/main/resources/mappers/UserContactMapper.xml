@@ -15,7 +15,7 @@
         INSERT INTO `user_contact` (`user_id`,
         `contact_id`,
         `name`,
-        `created_at`)
+        `create_time`)
         VALUES (#{userContact.userId},
         #{userContact.contactId},
         #{userContact.name},

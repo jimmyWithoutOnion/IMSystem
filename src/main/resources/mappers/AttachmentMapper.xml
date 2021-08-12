@@ -13,10 +13,10 @@
 
     <insert id="createAttachment" parameterType="Attachment" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `attachments` (`message_id`,
-        `file_url`,
-        `created_at`)
+        `file_address`,
+        `create_time`)
         VALUES (#{attachment.messageId},
-        #{attachment.fileURL},
+        #{attachment.fileAddress},
         #{attachment.createTime})
     </insert>
 

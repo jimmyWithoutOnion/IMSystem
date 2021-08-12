@@ -13,8 +13,8 @@
     <insert id="createConversation" parameterType="Conversation" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `conversations` (`title`,
         `creator_id`,
-        `created_at`,
-        `deleted_at`)
+        `create_time`,
+        `delete_time`)
         VALUES (#{conversation.title},
         #{conversation.creatorId},
         #{conversation.createTime},
