@@ -8,32 +8,36 @@ CREATE TABLE IF NOT EXISTS users (
     name VARCHAR(32) NOT NUll UNIQUE,
     password VARCHAR(32) NOT NULL,
     gender ENUM('male', 'female') NOT NULL,
+    signature VARCHAR(32) NOT NULL,
     email VARCHAR(32) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
+SHOW WARNINGS;
 
 DROP TABLE IF EXISTS contacts;
 CREATE TABLE IF NOT EXISTS contacts (
     id INT NOT NULL,
     name VARCHAR(32) NOT NULL,
     email VARCHAR(32) NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
+SHOW WARNINGS;
 
 DROP TABLE IF EXISTS user_contact;
 CREATE TABLE IF NOT EXISTS user_contact (
     user_id INT NOT NULL,
     contact_id INT NOT NULL,
     name VARCHAR(32) NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     PRIMARY KEY (user_id, contact_id),
     FOREIGN KEY (user_id)
         REFERENCES users(id),
     FOREIGN KEY (contact_id)
         REFERENCES contacts(id)
 )ENGINE=InnoDB;
+SHOW WARNINGS;
 
 DROP TABLE IF EXISTS conversations;
 CREATE TABLE IF NOT EXISTS conversations (
@@ -46,6 +50,7 @@ CREATE TABLE IF NOT EXISTS conversations (
     FOREIGN KEY (creator_id)
         REFERENCES users(id)
 )ENGINE=InnoDB;
+SHOW WARNINGS;
 
 DROP TABLE IF EXISTS participants;
 CREATE TABLE IF NOT EXISTS participants (
@@ -60,6 +65,7 @@ CREATE TABLE IF NOT EXISTS participants (
     FOREIGN KEY (user_id)
         REFERENCES users(id)
 )ENGINE=InnoDB;
+SHOW WARNINGS;
 
 DROP TABLE IF EXISTS messages;
 CREATE TABLE IF NOT EXISTS messages (
@@ -76,6 +82,7 @@ CREATE TABLE IF NOT EXISTS messages (
     FOREIGN KEY (sender_id)
         REFERENCES users(id)
 )ENGINE=InnoDB;
+SHOW WARNINGS;
 
 DROP TABLE IF EXISTS attachments;
 CREATE TABLE IF NOT EXISTS attachments (
@@ -85,8 +92,9 @@ CREATE TABLE IF NOT EXISTS attachments (
     created_at TIMESTAMP NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (message_id)
-        REFERENCES message(id)
+        REFERENCES messages(id)
 )ENGINE=InnoDB;
+SHOW WARNINGS;
 
 
 
