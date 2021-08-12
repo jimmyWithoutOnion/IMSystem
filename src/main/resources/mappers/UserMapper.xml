@@ -8,23 +8,25 @@
 
     <select id="selectUserById" parameterType="int" resultType="User">
         SELECT * FROM `users`
-        WHERE `id` = #{id}")
+        WHERE `id` = #{id}
     </select>
 
     <insert id="createUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `users` (`name`,
         `password`,
         `gender`,
+        `signature`,
         `email`,
         `created_at`)
         VALUES (#{user.name},
         #{user.password},
         #{user.gender},
+        #{user.signature},
         #{user.email},
         #{user.createTime})
     </insert>
 
-    <delete id="deleteById">
+    <delete id="deleteUserById">
         DELETE
         FROM `users`
         WHERE `id` = #{id}

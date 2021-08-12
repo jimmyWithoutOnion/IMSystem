@@ -39,5 +39,5 @@ public interface UserMapper {
      * @param id 主键id
      * @return 成功 - {@code 1} 失败- {@code 0
      */
-    int deleteUser(@Param("id") Long id);
+    int deleteUserById(@Param("id") Long id);
 }

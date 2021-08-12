@@ -37,6 +37,11 @@ public class User implements Serializable {
     private String gender;
 
     /**
+     * 签名
+     */
+    private String signature;
+
+    /**
      * 邮箱
      */
     private String email;

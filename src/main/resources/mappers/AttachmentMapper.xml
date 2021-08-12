@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.kunpengimsystem.mapper.AttachmentMapper">
+
+    <select id="selectAllAttachment">
+        SELECT * FROM `attachments`
+    </select>
+
+    <select id="selectAttachmentByMessageId">
+        SELECT * FROM `attachments`
+        WHERE `message_id` = #{messageId}
+    </select>
+
+    <insert id="createAttachment" parameterType="Attachment" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `attachments` (`message_id`,
+        `file_url`,
+        `created_at`)
+        VALUES (#{attachment.messageId},
+        #{attachment.fileURL},
+        #{attachment.createTime})
+    </insert>
+
+    <delete id="deleteAttachmentById">
+        DELETE
+        FROM `attachments`
+        WHERE `id` = #{id}
+    </delete>
+</mapper>

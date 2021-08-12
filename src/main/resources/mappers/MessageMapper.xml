@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huawei.kunpengimsystem.mapper.MessageMapper">
+
+    <select id="selectAllMessage">
+        SELECT * FROM `messages`
+    </select>
+
+    <select id="selectMessageByConversationId">
+        SELECT * FROM `messages`
+        WHERE `conversation_id` = #{conversationId}
+    </select>
+
+    <select id="selectMessageByConversationIdWithNumberLimit">
+        SELECT * FROM `messages`
+        WHERE `conversation_id` = #{conversationId}
+        ORDER BY `created_at`,`id` DESC
+        LIMIT #{limit}
+    </select>
+
+    <insert id="createMessage" parameterType="Message" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `messages` (`conversation_id`,
+        `sender_id`,
+        `message_type`,
+        `message`,
+        `created_at`,
+        `deleted_at`)
+        VALUES (#{message.conversationId},
+        #{message.senderId},
+        #{message.messageType},
+        #{message.messageContext},
+        #{message.createTime},
+        #{message.deleteTime})
+    </insert>
+
+    <delete id="deleteMessageById">
+        DELETE
+        FROM `messages`
+        WHERE `id` = #{id}
+    </delete>
+</mapper>

@@ -8,7 +8,7 @@
 
     <select id="selectContactById" parameterType="int" resultType="Contact">
         SELECT * FROM `contacts`
-        WHERE id = #{id}")
+        WHERE `id` = #{id}
     </select>
 
     <insert id="createContact" parameterType="Contact" keyProperty="id">
@@ -16,13 +16,13 @@
         `name`,
         `email`,
         `create_time`)
-        VALUES (#{contact.id
+        VALUES (#{contact.id},
         #{contact.name},
         #{contact.email},
         #{contact.createTime})
     </insert>
 
-    <delete id="deleteById">
+    <delete id="deleteContactById">
         DELETE
         FROM `contacts`
         WHERE `id` = #{id}

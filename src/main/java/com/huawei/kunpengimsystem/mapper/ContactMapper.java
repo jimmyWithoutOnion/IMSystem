@@ -23,7 +23,7 @@ public interface ContactMapper {
      *
      * @return 联系人
      */
-    Contact selectContactById();
+    Contact selectContactById(@Param("id") Long id);
 
     /**
      * 新建联系人
@@ -39,5 +39,5 @@ public interface ContactMapper {
      * @param id 主键id
      * @return 成功 - {@code 1} 失败- {@code 0}
      */
-    int deleteContact(@Param("id") Long id);
+    int deleteContactById(@Param("id") Long id);
 }

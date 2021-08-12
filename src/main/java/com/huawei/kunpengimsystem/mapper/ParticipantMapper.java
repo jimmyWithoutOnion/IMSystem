@@ -1,0 +1,43 @@
+package com.huawei.kunpengimsystem.mapper;
+
+import com.huawei.kunpengimsystem.entity.Participant;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+@Mapper
+@Component
+public interface ParticipantMapper {
+
+    /**
+     * 查询所有参与者
+     *
+     * @return 参与者列表
+     */
+    List<Participant> selectAllParticipant();
+
+    /**
+     *
+     * @param userId 用户id
+     * @return  参与者列表
+     */
+    List<Participant> selectParticipantByUserId(@Param("userId") Long userId);
+
+    /**
+     * 创建参与者
+     *
+     * @param participant 参与者
+     * @return 成功 - {@code 1} 失败- {@code 0}
+     */
+    int createParticipant(@Param("participant") Participant participant);
+
+    /**
+     * 根据id删除参与者
+     *
+     * @param id 主键id
+     * @return 成功 - {@code 1} 失败- {@code 0}
+     */
+    int deleteParticipantById(@Param("id") Long id);
+}

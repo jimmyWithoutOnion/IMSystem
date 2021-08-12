@@ -8,10 +8,10 @@
 
     <select id="selectUserContactByUserId">
         SELECT * FROM `user_contact`
-        WHERE `user_id` = #{userId}")
+        WHERE `user_id` = #{userId}
     </select>
 
-    <insert id="createUser" parameterType="UserContact">
+    <insert id="createUserContact" parameterType="UserContact">
         INSERT INTO `user_contact` (`user_id`,
         `contact_id`,
         `name`,
@@ -22,7 +22,7 @@
         #{userContact.createTime})
     </insert>
 
-    <delete id="deleteById">
+    <delete id="deleteUserContactById">
         DELETE
         FROM `user_contact`
         WHERE `id` = #{id}
