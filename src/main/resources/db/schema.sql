@@ -31,11 +31,7 @@ CREATE TABLE IF NOT EXISTS user_contact (
     contact_id INT NOT NULL,
     name VARCHAR(32) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-    PRIMARY KEY (user_id, contact_id),
-    FOREIGN KEY (user_id)
-        REFERENCES users(id),
-    FOREIGN KEY (contact_id)
-        REFERENCES contacts(id)
+    PRIMARY KEY (user_id, contact_id)
 )ENGINE=InnoDB;
 SHOW WARNINGS;
 
@@ -46,9 +42,7 @@ CREATE TABLE IF NOT EXISTS conversations (
     creator_id INT NOT NULL,
     created_at TIMESTAMP NOT NULL,
     deleted_at TIMESTAMP,
-    PRIMARY KEY (id),
-    FOREIGN KEY (creator_id)
-        REFERENCES users(id)
+    PRIMARY KEY (id)
 )ENGINE=InnoDB;
 SHOW WARNINGS;
 
@@ -59,11 +53,7 @@ CREATE TABLE IF NOT EXISTS participants (
     user_id INT NOT NULL,
     type ENUM('single', 'group') NOT NULL,
     created_at TIMESTAMP NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (conversation_id)
-        REFERENCES conversations(id),
-    FOREIGN KEY (user_id)
-        REFERENCES users(id)
+    PRIMARY KEY (id)
 )ENGINE=InnoDB;
 SHOW WARNINGS;
 
@@ -76,11 +66,7 @@ CREATE TABLE IF NOT EXISTS messages (
     message VARCHAR(255) NOT NULL DEFAULT '',
     created_at TIMESTAMP NOT NULL,
     deleted_at TIMESTAMP,
-    PRIMARY KEY (id),
-    FOREIGN KEY (conversation_id)
-        REFERENCES conversations(id),
-    FOREIGN KEY (sender_id)
-        REFERENCES users(id)
+    PRIMARY KEY (id)
 )ENGINE=InnoDB;
 SHOW WARNINGS;
 
@@ -90,9 +76,7 @@ CREATE TABLE IF NOT EXISTS attachments (
     message_id INT NOT NULL,
     file_url VARCHAR(40) NOT NULL,
     created_at TIMESTAMP NOT NULL,
-    PRIMARY KEY (id),
-    FOREIGN KEY (message_id)
-        REFERENCES messages(id)
+    PRIMARY KEY (id)
 )ENGINE=InnoDB;
 SHOW WARNINGS;
 
