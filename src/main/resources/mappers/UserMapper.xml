@@ -6,9 +6,9 @@
         SELECT * FROM `users`
     </select>
 
-    <select id="selectUserById" parameterType="int" resultType="User">
+    <select id="selectUserById" parameterType="String" resultType="User">
         SELECT * FROM `users`
-        WHERE `id` = #{id}
+        WHERE `name` = #{name} AND `password` = #{password}
     </select>
 
     <insert id="createUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">

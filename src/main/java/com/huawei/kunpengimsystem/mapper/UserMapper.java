@@ -18,12 +18,13 @@ public interface UserMapper {
     List<User> selectAllUser();
 
     /**
-     * 根据id查询用户
+     * 根据用户名和密码查询用户
      *
-     * @param id 主键id
+     * @param name 用户名
+     * @param password 密码
      * @return 当前id的用户，不存在则是{@code null}
      */
-    User selectUserById(@Param("id") Long id);
+    User selectUserByNameAndPassword(@Param("name") String name, @Param("password") String password);
 
     /**
      * 新建用户
