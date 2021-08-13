@@ -26,6 +26,14 @@ public interface ContactMapper {
     Contact selectContactById(@Param("id") Integer id);
 
     /**
+     * 根据用户id查询联系人
+     *
+     * @param userId 用户id
+     * @return 联系人列表
+     */
+    List<Contact> selectContactByUserId(@Param("userId") Integer userId);
+
+    /**
      * 新建联系人
      *
      * @param contact 用户

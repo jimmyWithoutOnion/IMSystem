@@ -1,9 +1,6 @@
 package com.huawei.kunpengimsystem.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,13 +9,15 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
+@Setter
 public class Conversation implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
      * 主键
      */
-    private Long id;
+    private Integer id;
 
     /**
      * 对话名称
@@ -28,7 +27,7 @@ public class Conversation implements Serializable {
     /**
      * 外键 对话创建者用户id
      */
-    private Long creatorId;
+    private Integer creatorId;
 
     /**
      * 对话创建时间

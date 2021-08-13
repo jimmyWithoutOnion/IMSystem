@@ -24,7 +24,7 @@ public interface ConversationMapper {
      * @param id 主键
      * @return 对话
      */
-    Conversation selectConversationById(@Param("id") Long id);
+    Conversation selectConversationById(@Param("id") Integer id);
 
     /**
      * 新建对话
@@ -40,5 +40,5 @@ public interface ConversationMapper {
      * @param id 主键id
      * @return 成功 - {@code 1} 失败- {@code 0}
      */
-    int deleteConversationById(@Param("id") Long id);
+    int deleteConversationById(@Param("id") Integer id);
 }

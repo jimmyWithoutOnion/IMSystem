@@ -24,7 +24,7 @@ public interface AttachmentMapper {
      * @param messageId 消息id
      * @return 附件
      */
-    Attachment selectAttachmentByMessageId(@Param("messageId") Long messageId);
+    Attachment selectAttachmentByMessageId(@Param("messageId") Integer messageId);
 
     /**
      * 创建新附件
@@ -40,5 +40,5 @@ public interface AttachmentMapper {
      * @param id 附件id
      * @return 成功 - {@code 1} 失败- {@code 0}
      */
-    int deleteAttachmentById(@Param("id") Long id);
+    int deleteAttachmentById(@Param("id") Integer id);
 }

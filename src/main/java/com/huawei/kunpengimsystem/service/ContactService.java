@@ -2,6 +2,8 @@ package com.huawei.kunpengimsystem.service;
 
 import com.huawei.kunpengimsystem.entity.Contact;
 
+import java.util.List;
+
 public interface ContactService {
-    Contact getContactById (Integer contactId);
+    List<Contact> getAllContactByUserId (Integer userId);
 }

@@ -11,14 +11,10 @@
     </select>
 
     <insert id="createConversation" parameterType="Conversation" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO `conversations` (`title`,
-        `creator_id`,
-        `create_time`,
-        `delete_time`)
-        VALUES (#{conversation.title},
-        #{conversation.creatorId},
-        #{conversation.createTime},
-        #{conversation.deleteTime})
+        INSERT INTO `conversations` ( `title`,
+        `creator_id`)
+        VALUES ( #{conversation.title},
+        #{conversation.creatorId})
     </insert>
 
     <delete id="deleteConversationById">

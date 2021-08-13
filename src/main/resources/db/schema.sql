@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS conversations (
     id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(32) NOT NULL,
     creator_id INT NOT NULL,
-    create_time TIMESTAMP NOT NULL,
+    create_time TIMESTAMP NOT NULL DEFAULT NOW(),
     delete_time TIMESTAMP,
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS participants (
     conversation_id INT NOT NULL,
     user_id INT NOT NULL,
     type VARCHAR(32) NOT NULL,
-    create_time TIMESTAMP NOT NULL,
+    create_time TIMESTAMP NOT NULL DEFAULT NOW(),
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
 SHOW WARNINGS;
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS messages (
     sender_id INT NOT NULL,
     messages_type VARCHAR(32) NOT NULL,
     message_context VARCHAR(255) NOT NULL DEFAULT '',
-    create_time TIMESTAMP NOT NULL,
+    create_time TIMESTAMP NOT NULL DEFAULT NOW(),
     delete_time TIMESTAMP,
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS attachments (
     id INT NOT NULL AUTO_INCREMENT,
     message_id INT NOT NULL,
     file_address VARCHAR(40) NOT NULL,
-    create_time TIMESTAMP NOT NULL,
+    create_time TIMESTAMP NOT NULL DEFAULT NOW(),
     PRIMARY KEY (id)
 )ENGINE=InnoDB;
 SHOW WARNINGS;

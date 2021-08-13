@@ -6,20 +6,18 @@
         SELECT * FROM `participants`
     </select>
 
-    <select id="selectParticipantByUserId" parameterType="int">
+    <select id="selectParticipantByUserId" parameterType="Integer">
         SELECT * FROM `participants`
         WHERE `user_id` = #{userId}
     </select>
 
     <insert id="createParticipant" parameterType="Participant" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO `conversations` (`conversation_id`,
+        INSERT INTO `participants` (`conversation_id`,
         `user_id`,
-        `type`,
-        `create_time`)
+        `type`)
         VALUES (#{participant.conversationId},
         #{participant.userId},
-        #{participant.type},
-        #{participant.createTime})
+        #{participant.type})
     </insert>
 
     <delete id="deleteParticipantById">

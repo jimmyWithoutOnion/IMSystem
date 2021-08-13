@@ -11,6 +11,12 @@
         WHERE `id` = #{id}
     </select>
 
+    <select id="selectContactByUserId" parameterType="Integer" resultType="Contact">
+        SELECT c.id, c.name, c.email FROM user_contact AS uc JOIN contacts AS c
+        ON uc.contact_id = c.id
+        WHERE user_id = #{userId};
+    </select>
+
     <insert id="createContact" parameterType="Contact" keyProperty="id">
         INSERT INTO `contacts` (`id`,
         `name`,

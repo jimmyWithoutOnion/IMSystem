@@ -1,9 +1,6 @@
 package com.huawei.kunpengimsystem.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,18 +9,20 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
+@Setter
 public class Attachment implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
      * 主键
      */
-    private Long id;
+    private Integer id;
 
     /**
      * 外键 信息id
      */
-    private Long messageId;
+    private Integer messageId;
 
     /**
      * 文件的地址

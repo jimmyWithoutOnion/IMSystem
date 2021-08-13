@@ -23,7 +23,7 @@ public interface ParticipantMapper {
      * @param userId 用户id
      * @return  参与者列表
      */
-    List<Participant> selectParticipantByUserId(@Param("userId") Long userId);
+    List<Participant> selectParticipantByUserId(@Param("userId") Integer userId);
 
     /**
      * 创建参与者
@@ -39,5 +39,5 @@ public interface ParticipantMapper {
      * @param id 主键id
      * @return 成功 - {@code 1} 失败- {@code 0}
      */
-    int deleteParticipantById(@Param("id") Long id);
+    int deleteParticipantById(@Param("id") Integer id);
 }

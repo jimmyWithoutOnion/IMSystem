@@ -24,7 +24,7 @@ public interface MessageMapper {
      * @param conversationId 对话id
      * @return 消息列表
      */
-    List<Message> selectMessageByConversationId(@Param("conversationId") Long conversationId);
+    List<Message> selectMessageByConversationId(@Param("conversationId") Integer conversationId);
 
     /**
      * 根据对话id和数量限制查询消息
@@ -33,7 +33,7 @@ public interface MessageMapper {
      * @param limit 数量限制
      * @return 消息列表
      */
-    List<Message> selectMessageByConversationIdWithNumberLimit(@Param("conversationId") Long conversationId, @Param("limit") Integer limit);
+    List<Message> selectMessageByConversationIdWithNumberLimit(@Param("conversationId") Integer conversationId, @Param("limit") Integer limit);
     /**
      * 创建新消息
      *
@@ -48,5 +48,5 @@ public interface MessageMapper {
      * @param id 主键
      * @return 成功 - {@code 1} 失败- {@code 0}
      */
-    int deleteMessageById(@Param("id") Long id);
+    int deleteMessageById(@Param("id") Integer id);
 }
