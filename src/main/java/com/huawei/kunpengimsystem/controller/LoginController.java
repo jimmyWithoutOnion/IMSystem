@@ -16,9 +16,9 @@ public class LoginController {
     @Resource(name = "UserService")
     private UserService userService;
 
-    @PostMapping("/checkLogin")
-    public Result checkLogin(@RequestBody Map<String, String> request) {
-        User user = userService.login(request.get("name"), request.get("password"));
+    @RequestMapping("/checkLogin")
+    public Result checkLogin(String username, String password) {
+        User user = userService.login(username, password);
         if (user == null) {
             return ResultUtil.fail("用户名或密码不正确");
         } else {
@@ -26,13 +26,4 @@ public class LoginController {
         }
     }
 
-    @RequestMapping("/test")
-    public String test() {
-        return  "success";
-    }
-
-    @RequestMapping("/check")
-    public String check() {
-        return "check";
-    }
 }
