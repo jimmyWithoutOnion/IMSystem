@@ -27,7 +27,12 @@ public class LoginController {
     }
 
     @RequestMapping("/test")
-    public String test(){
+    public String test() {
         return  "success";
+    }
+
+    @RequestMapping("/check")
+    public String check() {
+        return "check";
     }
 }
