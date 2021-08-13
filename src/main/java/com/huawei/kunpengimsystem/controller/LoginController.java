@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import java.util.Map;
 
-@Controller
+@RestController
 @RequestMapping("/login")
 public class LoginController {
     @Resource(name = "UserService")
@@ -24,5 +24,10 @@ public class LoginController {
         } else {
             return ResultUtil.success(null);
         }
+    }
+
+    @RequestMapping("/test")
+    public String test(){
+        return  "success";
     }
 }
