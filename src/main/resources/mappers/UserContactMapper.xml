@@ -6,7 +6,7 @@
         SELECT * FROM `user_contact`
     </select>
 
-    <select id="selectUserContactByUserId">
+    <select id="selectUserContactByUserId" parameterType="Integer" resultMap="">
         SELECT * FROM `user_contact`
         WHERE `user_id` = #{userId}
     </select>

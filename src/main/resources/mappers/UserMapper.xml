@@ -6,9 +6,15 @@
         SELECT * FROM `users`
     </select>
 
-    <select id="selectUserById" parameterType="String" resultType="User">
+    <select id="selectUserByNameAndPassword" parameterType="String" resultType="User">
         SELECT * FROM `users`
         WHERE `name` = #{name} AND `password` = #{password}
+    </select>
+
+    <select id="selectUserByUserId" parameterType="Integer" resultType="User">
+        SELECT `id`, `name`, `gender`, `signature`, `email`, `create_time`
+        FROM `users`
+        WHERE `id` = #{id}
     </select>
 
     <insert id="createUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">

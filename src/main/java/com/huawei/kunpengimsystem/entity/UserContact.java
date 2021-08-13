@@ -18,12 +18,12 @@ public class UserContact implements Serializable {
     /**
      * 主键 用户id
      */
-    private Long userId;
+    private Integer userId;
 
     /**
      * 主键 联系人id
      */
-    private Long contactId;
+    private Integer contactId;
 
     /**
      * 联系人姓名

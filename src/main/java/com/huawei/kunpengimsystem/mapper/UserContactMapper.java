@@ -24,7 +24,7 @@ public interface UserContactMapper {
      * @param userId 用户id
      * @return 相关用户的所有联系人
      */
-    List<UserContact> selectUserContactByUserId(@Param("userId") Long userId);
+    List<UserContact> selectUserContactByUserId(@Param("userId") Integer userId);
 
     /**
      * 新建用户联系人
@@ -40,5 +40,5 @@ public interface UserContactMapper {
      * @param id 主键
      * @return 成功 - {@code 1} 失败- {@code 0}
      */
-    int deleteUserContactById(@Param("id") Long id);
+    int deleteUserContactById(@Param("id") Integer id);
 }

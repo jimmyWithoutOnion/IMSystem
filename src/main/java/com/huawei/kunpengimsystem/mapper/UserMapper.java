@@ -27,6 +27,14 @@ public interface UserMapper {
     User selectUserByNameAndPassword(@Param("name") String name, @Param("password") String password);
 
     /**
+     * 根据用户id查询用户信息
+     *
+     * @param id 用户id
+     * @return 用户
+     */
+    User selectUserByUserId(@Param("id") Integer id);
+
+    /**
      * 新建用户
      *
      * @param user 用户
@@ -40,5 +48,5 @@ public interface UserMapper {
      * @param id 主键id
      * @return 成功 - {@code 1} 失败- {@code 0
      */
-    int deleteUserById(@Param("id") Long id);
+    int deleteUserById(@Param("id") Integer id);
 }
