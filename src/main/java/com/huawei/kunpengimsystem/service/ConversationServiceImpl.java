@@ -15,8 +15,8 @@ public class ConversationServiceImpl implements ConversationService{
     private ConversationMapper conversationMapper;
 
     @Override
-    public List<Conversation> getAllConversationByUserId(Integer userId) {
-        return null;
+    public List<Conversation> getAllConversationByParticipantUserId(Integer userId) {
+        return conversationMapper.selectAllConversationByParticipantUserId(userId);
     }
 
     @Override

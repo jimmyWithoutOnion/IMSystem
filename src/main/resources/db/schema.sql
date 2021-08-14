@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS messages (
     id INT NOT NULL AUTO_INCREMENT,
     conversation_id INT NOT NULL,
     sender_id INT NOT NULL,
-    messages_type VARCHAR(32) NOT NULL,
+    message_type VARCHAR(32) NOT NULL,
     message_context VARCHAR(255) NOT NULL DEFAULT '',
     create_time TIMESTAMP NOT NULL DEFAULT NOW(),
     delete_time TIMESTAMP,

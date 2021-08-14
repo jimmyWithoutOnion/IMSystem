@@ -11,10 +11,10 @@
         WHERE `conversation_id` = #{conversationId}
     </select>
 
-    <select id="selectMessageByConversationIdWithNumberLimit">
+    <select id="selectMessageByConversationIdWithNumberLimit" resultType="Message">
         SELECT * FROM `messages`
         WHERE `conversation_id` = #{conversationId}
-        ORDER BY `create_time`,`id` DESC
+        ORDER BY `create_time` DESC
         LIMIT #{limit}
     </select>
 
@@ -22,15 +22,11 @@
         INSERT INTO `messages` (`conversation_id`,
         `sender_id`,
         `message_type`,
-        `message_context`,
-        `create_time`,
-        `delete_time`)
+        `message_context`)
         VALUES (#{message.conversationId},
         #{message.senderId},
         #{message.messageType},
-        #{message.messageContext},
-        #{message.createTime},
-        #{message.deleteTime})
+        #{message.messageContext})
     </insert>
 
     <delete id="deleteMessageById">

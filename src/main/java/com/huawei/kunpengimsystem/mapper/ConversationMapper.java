@@ -27,6 +27,14 @@ public interface ConversationMapper {
     Conversation selectConversationById(@Param("id") Integer id);
 
     /**
+     * 根据参与者的用户id查询所有对话信息
+     *
+     * @param userId 用户id
+     * @return 对话列表
+     */
+    List<Conversation> selectAllConversationByParticipantUserId(@Param("userId") Integer userId);
+
+    /**
      * 新建对话
      *
      * @param conversation 对话

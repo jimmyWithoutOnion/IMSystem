@@ -10,6 +10,12 @@
         WHERE `id` = #{id}
     </select>
 
+    <select id="selectAllConversationByParticipantUserId" parameterType="Integer" resultType="Conversation">
+        SELECT * FROM `conversations` AS c JOIN `participants` AS p
+        ON c.id = p.conversation_id
+        WHERE p.user_id = #{userId}
+    </select>
+
     <insert id="createConversation" parameterType="Conversation" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `conversations` ( `title`,
         `creator_id`)

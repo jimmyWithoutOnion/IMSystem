@@ -2,8 +2,10 @@ package com.huawei.kunpengimsystem.controller;
 
 import com.huawei.kunpengimsystem.entity.Conversation;
 
+import com.huawei.kunpengimsystem.entity.Message;
 import com.huawei.kunpengimsystem.entity.Participant;
 import com.huawei.kunpengimsystem.service.ConversationService;
+import com.huawei.kunpengimsystem.service.MessageService;
 import com.huawei.kunpengimsystem.service.ParticipantService;
 import com.huawei.kunpengimsystem.utils.Result;
 import com.huawei.kunpengimsystem.utils.ResultUtil;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/chat")
@@ -21,6 +24,10 @@ public class ChatController {
     @Resource(name="ParticipantService")
     private ParticipantService participantService;
 
+    @Resource(name="MessageService")
+    private MessageService messageService;
+
+    // 创建对话
     @RequestMapping("/createConversation")
     public Result createConversation(Integer userId, String title, Integer contactId) {
         Conversation conversation = new Conversation();
@@ -39,14 +46,29 @@ public class ChatController {
         return ResultUtil.success(null);
     }
 
-    @RequestMapping("/queryAllConversationByUserId")
-    public Result queryAllConversationByUserId(Integer userId) {
-        return null;
+    // 根据参与者的用户id查询所有对话
+    @RequestMapping("/queryAllConversationByParticipantUserId")
+    public Result queryAllConversationByParticipantUserId(Integer userId) {
+        List<Conversation> conversationList = conversationService.getAllConversationByParticipantUserId(userId);
+        return ResultUtil.success(conversationList);
     }
 
-
+    // 根据对话id查询按时间倒排消息，limit是消息的条数
     @RequestMapping("/queryMessageByConversationIdWithLimit")
     public Result queryMessageByConversationIdWithLimit(Integer conversationId, Integer limit) {
-        return null;
+        List<Message> messageList = messageService.getMessageByConversationIdWithLimit(conversationId, limit);
+        return ResultUtil.success(messageList);
+    }
+
+    // 发送消息
+    @RequestMapping("/createMessage")
+    public Result createMessage(Integer conversationId, Integer senderId, String messageType, String messageContext) {
+        Message message = new Message();
+        message.setConversationId(conversationId);
+        message.setSenderId(senderId);
+        message.setMessageType(messageType);
+        message.setMessageContext(messageContext);
+        messageService.createMessage(message);
+        return ResultUtil.success(null);
     }
 }
