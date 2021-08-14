@@ -21,7 +21,7 @@ public class LoginController {
         if (user == null) {
             return ResultUtil.fail("用户名或密码不正确");
         } else {
-            return ResultUtil.success(null);
+            return ResultUtil.success(user);
         }
     }
 }
