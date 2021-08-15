@@ -8,6 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class KunpengImSystemApplication {
 
+	static{
+		System.load("/home/libMyJni.so"); 
+	}
+	
 	public static void main(String[] args) { SpringApplication.run(KunpengImSystemApplication.class, args); }
 
 }
