@@ -8,4 +8,6 @@ public interface MessageService {
     List<Message> getMessageByConversationIdWithLimit(Integer conversationId, Integer limit);
 
     int createMessage(Message message);
+
+    void sendToUser(Message message);
 }

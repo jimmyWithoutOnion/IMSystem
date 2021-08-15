@@ -9,6 +9,7 @@ import com.huawei.kunpengimsystem.service.MessageService;
 import com.huawei.kunpengimsystem.service.ParticipantService;
 import com.huawei.kunpengimsystem.utils.Result;
 import com.huawei.kunpengimsystem.utils.ResultUtil;
+import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -71,4 +72,14 @@ public class ChatController {
         messageService.createMessage(message);
         return ResultUtil.success(null);
     }
+
+    // 这里的 @MessageMapping 可以当成 @RequestMapping,
+    // 当有信息 (sendMsg 方法中的 messageEntity 参数即为客服端发送的信息实体)
+    // 发送到 /sendMsg 时会在这里进行处理
+    @MessageMapping("/sendMsg")
+    public void sendMsg(Message message) {
+        System.out.print("********message:" + message);
+        messageService.sendToUser(message);
+    }
+
 }
