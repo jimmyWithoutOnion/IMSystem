@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -50,8 +52,18 @@ public class ChatController {
     // 根据参与者的用户id查询所有对话
     @RequestMapping("/queryAllConversationByParticipantUserId")
     public Result queryAllConversationByParticipantUserId(Integer userId) {
+        List<HashMap> resultList = new ArrayList<>();
         List<Conversation> conversationList = conversationService.getAllConversationByParticipantUserId(userId);
-        return ResultUtil.success(conversationList);
+
+        for (Conversation conversation: conversationList) {
+            HashMap<String, String> map = new HashMap<>();
+            map.put("title", conversation.getTitle());
+            map.put("id", Integer.toString(conversation.getId()));
+            Message message = messageService.getMessageByConversationIdWithLimit(conversation.getId(), 1).get(0);
+            map.put("messageContext", message.getMessageContext());
+            resultList.add(map);
+        }
+        return ResultUtil.success(resultList);
     }
 
     // 根据对话id查询按时间倒排消息，limit是消息的条数
