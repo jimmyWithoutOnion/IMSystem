@@ -4,4 +4,6 @@ import com.huawei.kunpengimsystem.entity.Participant;
 
 public interface ParticipantService {
     Integer createParticipant(Participant participant);
+
+    String getUserNameByConversationId(Integer conversationId, Integer userId);
 }

@@ -57,7 +57,8 @@ public class ChatController {
 
         for (Conversation conversation: conversationList) {
             HashMap<String, String> map = new HashMap<>();
-            map.put("title", conversation.getTitle());
+            String userName = participantService.getUserNameByConversationId(conversation.getId(), userId);
+            map.put("title", userName);
             map.put("id", Integer.toString(conversation.getId()));
             List<Message> messageList = messageService.getMessageByConversationIdWithLimit(conversation.getId(), 1);
             if (messageList.size() > 0) {

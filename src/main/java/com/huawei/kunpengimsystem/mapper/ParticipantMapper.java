@@ -26,6 +26,15 @@ public interface ParticipantMapper {
     List<Participant> selectParticipantByUserId(@Param("userId") Integer userId);
 
     /**
+     * 查询所有对话的其他用户啊名字
+     *
+     * @param conversationId 对话id
+     * @param userId 用户id
+     * @return 其他用户名字
+     */
+    String selectUserNameByConversationId(@Param("conversationId") Integer conversationId, @Param("userId") Integer userId);
+
+    /**
      * 创建参与者
      *
      * @param participant 参与者

@@ -16,4 +16,9 @@ public class ParticipantServiceImpl implements ParticipantService{
     public Integer createParticipant(Participant participant) {
         return participantMapper.createParticipant(participant);
     }
+
+    @Override
+    public String getUserNameByConversationId(Integer conversationId, Integer userId) {
+        return participantMapper.selectUserNameByConversationId(conversationId, userId);
+    }
 }

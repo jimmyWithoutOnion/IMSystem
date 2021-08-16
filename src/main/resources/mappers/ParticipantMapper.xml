@@ -11,6 +11,12 @@
         WHERE `user_id` = #{userId}
     </select>
 
+    <select id="selectUserNameByConversationId" resultType="String">
+        select users.name from participants,users
+        where conversation_id = #{conversationId}
+        and user_id &lt;&gt; #{userId} and participants.user_id=users.id
+    </select>
+
     <insert id="createParticipant" parameterType="Participant" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO `participants` (`conversation_id`,
         `user_id`,
