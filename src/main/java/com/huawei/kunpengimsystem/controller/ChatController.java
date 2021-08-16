@@ -91,6 +91,8 @@ public class ChatController {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             map.put("time", simpleDateFormat.format(message.getCreateTime()));
             map.put("content", message.getMessageContext());
+            map.put("senderId", String.valueOf(message.getSenderId()));
+            map.put("messageType", message.getMessageType());
             resultMapList.add(map);
         }
         return ResultUtil.success(resultMapList);
