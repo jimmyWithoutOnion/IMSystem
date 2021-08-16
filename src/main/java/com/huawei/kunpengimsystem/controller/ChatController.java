@@ -4,9 +4,11 @@ import com.huawei.kunpengimsystem.entity.Conversation;
 
 import com.huawei.kunpengimsystem.entity.Message;
 import com.huawei.kunpengimsystem.entity.Participant;
+import com.huawei.kunpengimsystem.entity.User;
 import com.huawei.kunpengimsystem.service.ConversationService;
 import com.huawei.kunpengimsystem.service.MessageService;
 import com.huawei.kunpengimsystem.service.ParticipantService;
+import com.huawei.kunpengimsystem.service.UserService;
 import com.huawei.kunpengimsystem.utils.Result;
 import com.huawei.kunpengimsystem.utils.ResultUtil;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +24,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/chat")
 public class ChatController {
+    @Resource(name = "UserService")
+    private UserService userService;
+
     @Resource(name="ConversationService")
     private ConversationService conversationService;
 
@@ -75,7 +81,19 @@ public class ChatController {
     @RequestMapping("/queryMessageByConversationIdWithLimit")
     public Result queryMessageByConversationIdWithLimit(Integer conversationId, Integer limit) {
         List<Message> messageList = messageService.getMessageByConversationIdWithLimit(conversationId, limit);
-        return ResultUtil.success(messageList);
+        List<HashMap> resultMapList = new ArrayList<>();
+        for (Message message: messageList) {
+            HashMap<String, String> map = new HashMap<>();
+            map.put("title", message.getMessageType());
+            User user = userService.getInformationById(message.getSenderId());
+            map.put("name", user.getName());
+            // 转换时间
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            map.put("time", simpleDateFormat.format(message.getCreateTime()));
+            map.put("content", message.getMessageContext());
+            resultMapList.add(map);
+        }
+        return ResultUtil.success(resultMapList);
     }
 
     // 发送消息
