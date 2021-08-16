@@ -25,10 +25,10 @@ INSERT INTO `user_contact`(`user_id`,`contact_id`,`name`)
 INSERT INTO `user_contact`(`user_id`,`contact_id`,`name`)
         VALUES (1,3,'c语言');
 
-INSERT INTO `conversations`(`title`,`creator_id`,)
+INSERT INTO `conversations`(`title`,`creator_id`)
         VALUES ('hahhahhaha',1);
 
-INSERT INTO `conversations`(`title`,`creator_id`,)
+INSERT INTO `conversations`(`title`,`creator_id`)
         VALUES ('lalalalalal',1);
 
 INSERT INTO `participants` (`conversation_id`,`user_id`,`type`)

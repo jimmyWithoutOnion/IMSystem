@@ -59,8 +59,12 @@ public class ChatController {
             HashMap<String, String> map = new HashMap<>();
             map.put("title", conversation.getTitle());
             map.put("id", Integer.toString(conversation.getId()));
-            Message message = messageService.getMessageByConversationIdWithLimit(conversation.getId(), 1).get(0);
-            map.put("messageContext", message.getMessageContext());
+            List<Message> messageList = messageService.getMessageByConversationIdWithLimit(conversation.getId(), 1);
+            if (messageList.size() > 0) {
+                map.put("messageContext", messageList.get(0).getMessageContext());
+            } else {
+                map.put("messageContext", "");
+            }
             resultList.add(map);
         }
         return ResultUtil.success(resultList);
