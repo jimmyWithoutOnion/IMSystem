@@ -11,11 +11,18 @@ import com.huawei.kunpengimsystem.service.ParticipantService;
 import com.huawei.kunpengimsystem.service.UserService;
 import com.huawei.kunpengimsystem.utils.Result;
 import com.huawei.kunpengimsystem.utils.ResultUtil;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +42,9 @@ public class ChatController {
 
     @Resource(name="MessageService")
     private MessageService messageService;
+
+    @Value("${file.upload.path}")
+    private String path;
 
     // 创建对话
     @RequestMapping("/createConversation")
@@ -127,4 +137,19 @@ public class ChatController {
         return ResultUtil.success(messageId);
     }
 
+    @RequestMapping("uploadFile")
+    public Result uploadFile(@RequestPart MultipartFile[] files) throws IOException {
+        for (MultipartFile file: files) {
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            String fileName = String.valueOf(timestamp.getTime());
+            String filePath = path + fileName;
+
+            File dest = new File(filePath);
+            Files.copy(file.getInputStream(), dest.toPath());
+
+            System.out.print(dest.toPath());
+        }
+
+        return ResultUtil.success("upload success");
+    }
 }

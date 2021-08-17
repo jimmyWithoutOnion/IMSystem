@@ -24,6 +24,11 @@ spring:
       pool-name: SpringBootDemoHikariCP
       max-lifetime: 60000
       connection-timeout: 30000
+  # 配置文件大小
+  servlet:
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 20MB
 logging:
   level:
     com.huawei: debug
@@ -34,3 +39,7 @@ mybatis:
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mappers/*.xml
   type-aliases-package: com.huawei.kunpengimsystem.entity
+# 配置文件地址
+file:
+  upload:
+    path: /tmp
