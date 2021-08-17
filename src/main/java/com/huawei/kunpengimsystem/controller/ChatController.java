@@ -106,24 +106,25 @@ public class ChatController {
     }
 
     // 发送消息
-    @RequestMapping("/createMessage")
-    public Result createMessage(Integer conversationId, Integer senderId, String messageType, String messageContext) {
-        Message message = new Message();
-        message.setConversationId(conversationId);
-        message.setSenderId(senderId);
-        message.setMessageType(messageType);
-        message.setMessageContext(messageContext);
-        messageService.createMessage(message);
-        return ResultUtil.success(null);
-    }
+//    @RequestMapping("/createMessage")
+//    public Result createMessage(Integer conversationId, Integer senderId, String messageType, String messageContext) {
+//        Message message = new Message();
+//        message.setConversationId(conversationId);
+//        message.setSenderId(senderId);
+//        message.setMessageType(messageType);
+//        message.setMessageContext(messageContext);
+//        messageService.createMessage(message);
+//        return ResultUtil.success(null);
+//    }
 
     // 这里的 @MessageMapping 可以当成 @RequestMapping,
     // 当有信息 (sendMsg 方法中的 messageEntity 参数即为客服端发送的信息实体)
     // 发送到 /sendMsg 时会在这里进行处理
     @MessageMapping("/sendMsg")
-    public void sendMsg(Message message) {
-        System.out.print("********message:" + message);
+    public Result sendMsg(Message message) {
         messageService.sendToUser(message);
+        Integer messageId = messageService.createMessage(message);
+        return ResultUtil.success(messageId);
     }
 
 }
