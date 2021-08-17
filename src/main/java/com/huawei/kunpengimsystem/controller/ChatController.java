@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -138,7 +140,12 @@ public class ChatController {
     }
 
     @RequestMapping("uploadFile")
-    public Result uploadFile(@RequestPart MultipartFile[] files) throws IOException {
+    public Result uploadFile(HttpServletRequest request) throws IOException {
+        List<MultipartFile> files = ((MultipartHttpServletRequest)request).getFiles("file");
+        if(files.size()==0){
+            return ResultUtil.fail("file not found");
+        }
+
         for (MultipartFile file: files) {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             String fileName = String.valueOf(timestamp.getTime());
