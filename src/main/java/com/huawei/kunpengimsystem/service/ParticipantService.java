@@ -6,4 +6,6 @@ public interface ParticipantService {
     Integer createParticipant(Participant participant);
 
     String getUserNameByConversationId(Integer conversationId, Integer userId);
+
+    Integer getConversationIdByUserIdAndContactId(Integer userId, Integer contactId);
 }

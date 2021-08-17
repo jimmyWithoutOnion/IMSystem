@@ -39,20 +39,27 @@ public class ChatController {
     // 创建对话
     @RequestMapping("/createConversation")
     public Result createConversation(Integer userId, String title, Integer contactId) {
-        Conversation conversation = new Conversation();
-        conversation.setTitle(title);
-        conversation.setCreatorId(userId);
-        conversationService.createConversation(conversation);
+        // 判断是否已经存在conversationId
+        Integer conversationId = participantService.getConversationIdByUserIdAndContactId(userId, contactId);
 
-        Participant participant = new Participant();
-        participant.setConversationId(conversation.getId());
-        participant.setUserId(userId);
-        participant.setType("single");
-        participantService.createParticipant(participant);
-        participant.setUserId(contactId);
-        participantService.createParticipant(participant);
+        if (conversationId != null) {
+            return ResultUtil.success(conversationId);
+        } else {
+            Conversation conversation = new Conversation();
+            conversation.setTitle(title);
+            conversation.setCreatorId(userId);
+            conversationService.createConversation(conversation);
 
-        return ResultUtil.success(null);
+            Participant participant = new Participant();
+            participant.setConversationId(conversation.getId());
+            participant.setUserId(userId);
+            participant.setType("single");
+            participantService.createParticipant(participant);
+            participant.setUserId(contactId);
+            participantService.createParticipant(participant);
+
+            return ResultUtil.success(conversation.getId());
+        }
     }
 
     // 根据参与者的用户id查询所有对话

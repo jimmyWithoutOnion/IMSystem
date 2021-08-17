@@ -35,6 +35,15 @@ public interface ParticipantMapper {
     String selectUserNameByConversationId(@Param("conversationId") Integer conversationId, @Param("userId") Integer userId);
 
     /**
+     * 根据用户id和联系人id查找对话id
+     *
+     * @param userId 用户id
+     * @param contactId 联系人id
+     * @return 对话id
+     */
+    Integer selectConversationIdByUserIdAndContactId(@Param("userId") Integer userId, @Param("contactId") Integer contactId);
+
+    /**
      * 创建参与者
      *
      * @param participant 参与者

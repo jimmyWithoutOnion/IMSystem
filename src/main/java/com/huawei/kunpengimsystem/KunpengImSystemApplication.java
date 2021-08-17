@@ -12,7 +12,10 @@ public class KunpengImSystemApplication {
 //	static{
 //		System.load("/home/libMyJni.so");
 //	}
-	
-	public static void main(String[] args) { SpringApplication.run(KunpengImSystemApplication.class, args); }
+
+
+	public static void main(String[] args) {
+		SpringApplication.run(KunpengImSystemApplication.class, args);
+	}
 
 }
