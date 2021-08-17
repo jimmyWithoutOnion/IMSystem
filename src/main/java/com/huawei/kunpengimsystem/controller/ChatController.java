@@ -1,14 +1,8 @@
 package com.huawei.kunpengimsystem.controller;
 
-import com.huawei.kunpengimsystem.entity.Conversation;
+import com.huawei.kunpengimsystem.entity.*;
 
-import com.huawei.kunpengimsystem.entity.Message;
-import com.huawei.kunpengimsystem.entity.Participant;
-import com.huawei.kunpengimsystem.entity.User;
-import com.huawei.kunpengimsystem.service.ConversationService;
-import com.huawei.kunpengimsystem.service.MessageService;
-import com.huawei.kunpengimsystem.service.ParticipantService;
-import com.huawei.kunpengimsystem.service.UserService;
+import com.huawei.kunpengimsystem.service.*;
 import com.huawei.kunpengimsystem.utils.Result;
 import com.huawei.kunpengimsystem.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -44,6 +39,9 @@ public class ChatController {
 
     @Resource(name="MessageService")
     private MessageService messageService;
+
+    @Resource(name="AttachmentService")
+    private AttachmentService attachmentService;
 
     @Value("${file.upload.path}")
     private String path;
@@ -118,17 +116,6 @@ public class ChatController {
     }
 
     // 发送消息
-//    @RequestMapping("/createMessage")
-//    public Result createMessage(Integer conversationId, Integer senderId, String messageType, String messageContext) {
-//        Message message = new Message();
-//        message.setConversationId(conversationId);
-//        message.setSenderId(senderId);
-//        message.setMessageType(messageType);
-//        message.setMessageContext(messageContext);
-//        messageService.createMessage(message);
-//        return ResultUtil.success(null);
-//    }
-
     // 这里的 @MessageMapping 可以当成 @RequestMapping,
     // 当有信息 (sendMsg 方法中的 messageEntity 参数即为客服端发送的信息实体)
     // 发送到 /sendMsg 时会在这里进行处理
@@ -136,27 +123,47 @@ public class ChatController {
     public Result sendMsg(Message message) {
         messageService.sendToUser(message);
         Integer messageId = messageService.createMessage(message);
+        if (!message.getMessageType().equals("text")) {
+            // 创建attachment入库
+            Attachment attachment = new Attachment();
+            attachment.setMessageId(message.getId());
+            attachment.setFileAddress(message.getMessageContext());
+            // 添加crc校验码-todo
+//            attachment.setFileCheckCode();
+            attachmentService.createAttachment(attachment);
+        }
         return ResultUtil.success(messageId);
     }
 
     @RequestMapping("uploadFile")
     public Result uploadFile(HttpServletRequest request) throws IOException {
         List<MultipartFile> files = ((MultipartHttpServletRequest)request).getFiles("file");
-        if(files.size()==0){
+        List<Path> pathList = new ArrayList<>();
+        if (files.size() == 0) {
             return ResultUtil.fail("file not found");
         }
 
         for (MultipartFile file: files) {
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             String fileName = String.valueOf(timestamp.getTime());
-            String filePath = path + fileName;
+            // 添加后缀
+            String name = file.getOriginalFilename();
+            if (name == null) {
+                return ResultUtil.fail("illegal file");
+            }
+            int index = name.lastIndexOf(".");
+            if (index == -1) {
+                return ResultUtil.fail("illegal file");
+            }
+            String fileExt = name.substring(index);
+            // 拼接文件名
+            String filePath = path + fileName + fileExt;
 
             File dest = new File(filePath);
             Files.copy(file.getInputStream(), dest.toPath());
-
-            System.out.print(dest.toPath());
+            pathList.add(dest.toPath());
         }
 
-        return ResultUtil.success("upload success");
+        return ResultUtil.success(pathList);
     }
 }

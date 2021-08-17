@@ -17,6 +17,10 @@ public class LoginController {
 
     @RequestMapping("/checkLogin")
     public Result checkLogin(String username, String password) {
+        // 加密-todo
+//        NativeUtil nativeUtil = new NativeUtil();
+//        String encryptedPassword = nativeUtil.getSha256Digest(password);
+//        userMapper.selectUserByNameAndPassword(name, encryptedPassword);
         User user = userService.login(username, password);
         if (user == null) {
             return ResultUtil.fail("用户名或密码不正确");

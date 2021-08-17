@@ -16,10 +16,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String name, String password) {
-        // 加密
-//        NativeUtil nativeUtil = new NativeUtil();
-//        String encryptedPassword = nativeUtil.getSha256Digest(password);
-//        return userMapper.selectUserByNameAndPassword(name, encryptedPassword);
         return userMapper.selectUserByNameAndPassword(name, password);
     }
 

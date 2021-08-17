@@ -34,7 +34,6 @@ public class MessageServiceImpl implements MessageService {
         // 底层会自动将第二个参数目的地址 /chat/contact 拼接为
         // /user/username/chat/contact，其中第二个参数 username 即为这里的第一个参数
         // username 也是前文中配置的 Principal 用户识别标志
-        System.out.print("*********id:" + message.getConversationId());
         simpMessagingTemplate.convertAndSendToUser(
                 String.valueOf(message.getConversationId()),
                 "/chat/contact",

@@ -30,6 +30,11 @@ public class Attachment implements Serializable {
     private String fileAddress;
 
     /**
+     * 文件校验码
+     */
+    private String fileCheckCode;
+
+    /**
      * 文件创建的时间
      */
     private Date createTime;
