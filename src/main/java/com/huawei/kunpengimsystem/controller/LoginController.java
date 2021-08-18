@@ -2,6 +2,7 @@ package com.huawei.kunpengimsystem.controller;
 
 import com.huawei.kunpengimsystem.entity.User;
 import com.huawei.kunpengimsystem.service.UserService;
+import com.huawei.kunpengimsystem.utils.NativeUtil;
 import com.huawei.kunpengimsystem.utils.Result;
 import com.huawei.kunpengimsystem.utils.ResultUtil;
 import org.springframework.web.bind.annotation.*;
@@ -17,10 +18,9 @@ public class LoginController {
 
     @RequestMapping("/checkLogin")
     public Result checkLogin(String username, String password) {
-        // 加密-todo
-//        NativeUtil nativeUtil = new NativeUtil();
-//        String encryptedPassword = nativeUtil.getSha256Digest(password);
-//        userMapper.selectUserByNameAndPassword(name, encryptedPassword);
+        NativeUtil nativeUtil = new NativeUtil();
+        String encryptedPassword = nativeUtil.getSha256Digest(password);
+        System.out.print(encryptedPassword);
         User user = userService.login(username, password);
         if (user == null) {
             return ResultUtil.fail("用户名或密码不正确");
