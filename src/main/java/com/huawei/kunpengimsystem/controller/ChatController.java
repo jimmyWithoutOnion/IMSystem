@@ -138,7 +138,7 @@ public class ChatController {
     @RequestMapping("uploadFile")
     public Result uploadFile(HttpServletRequest request) throws IOException {
         List<MultipartFile> files = ((MultipartHttpServletRequest)request).getFiles("file");
-        List<Path> pathList = new ArrayList<>();
+        List<String> destList = new ArrayList<>();
         if (files.size() == 0) {
             return ResultUtil.fail("file not found");
         }
@@ -161,9 +161,9 @@ public class ChatController {
 
             File dest = new File(filePath);
             Files.copy(file.getInputStream(), dest.toPath());
-            pathList.add(dest.toPath());
+            destList.add(fileName + fileExt);
         }
 
-        return ResultUtil.success(pathList);
+        return ResultUtil.success(destList);
     }
 }
