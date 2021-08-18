@@ -6,15 +6,15 @@ spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/im_system?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8
     username: root
-    password: 12345678
+    password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.zaxxer.hikari.HikariDataSource
-    initialization-mode: always
-    continue-on-error: true
-    schema:
-      - "classpath:db/schema.sql"
-    data:
-      - "classpath:db/data.sql"
+#    initialization-mode: always
+#    continue-on-error: true
+#    schema:
+#      - "classpath:db/schema.sql"
+#    data:
+#      - "classpath:db/data.sql"
     hikari:
       minimum-idle: 5
       connection-test-query: SELECT 1 FROM DUAL
@@ -24,7 +24,7 @@ spring:
       pool-name: SpringBootDemoHikariCP
       max-lifetime: 60000
       connection-timeout: 30000
-  # 配置文件大小
+#   配置文件大小
   servlet:
     multipart:
       max-file-size: 15MB
@@ -35,11 +35,11 @@ logging:
     com.huawei.orm.mybatis.mapper: trace
 mybatis:
   configuration:
-    # 下划线转驼峰
+#     下划线转驼峰
     map-underscore-to-camel-case: true
   mapper-locations: classpath:mappers/*.xml
   type-aliases-package: com.huawei.kunpengimsystem.entity
 # 配置文件地址
 file:
   upload:
-    path: /tmp
+    path: /tmp/imSystem
