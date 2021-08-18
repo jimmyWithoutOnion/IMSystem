@@ -42,4 +42,4 @@ mybatis:
 # 配置文件地址
 file:
   upload:
-    path: /tmp/imSystem
+    path: /usr/local/nginx/html/chat/images/chat-img/
