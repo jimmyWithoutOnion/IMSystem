@@ -131,7 +131,7 @@ public class ChatController {
             attachment.setFileAddress(path + filePath);
             // 添加crc校验码
             NativeUtil nativeUtil = new NativeUtil();
-            String crcCode = nativeUtil.getCrc32Digest(path + path);
+            String crcCode = nativeUtil.getCrc32Digest(path + filePath);
             attachment.setFileCheckCode(crcCode);
             attachmentService.createAttachment(attachment);
         }
