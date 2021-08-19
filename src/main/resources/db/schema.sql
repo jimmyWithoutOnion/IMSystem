@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE IF NOT EXISTS users (
     id INT NOT NULL AUTO_INCREMENT,
     name VARCHAR(32) NOT NUll UNIQUE,
-    password VARCHAR(32) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     gender VARCHAR(32) NOT NULL,
     signature VARCHAR(32) NOT NULL,
     email VARCHAR(32) NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS attachments (
     id INT NOT NULL AUTO_INCREMENT,
     message_id INT NOT NULL,
     file_address VARCHAR(255) NOT NULL,
-    file_check_code VARCHAR(32),
+    file_check_code VARCHAR(255),
     create_time TIMESTAMP NOT NULL DEFAULT NOW(),
     PRIMARY KEY (id)
 )ENGINE=InnoDB;

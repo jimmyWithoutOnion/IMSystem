@@ -3,12 +3,12 @@ package com.huawei.kunpengimsystem.controller;
 import com.huawei.kunpengimsystem.entity.*;
 
 import com.huawei.kunpengimsystem.service.*;
+import com.huawei.kunpengimsystem.utils.NativeUtil;
 import com.huawei.kunpengimsystem.utils.Result;
 import com.huawei.kunpengimsystem.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -127,9 +126,12 @@ public class ChatController {
             // 创建attachment入库
             Attachment attachment = new Attachment();
             attachment.setMessageId(message.getId());
-            attachment.setFileAddress(message.getMessageContext());
-            // 添加crc校验码-todo
-//            attachment.setFileCheckCode();
+            String filePath = message.getMessageContext();
+            attachment.setFileAddress(filePath);
+            // 添加crc校验码
+            NativeUtil nativeUtil = new NativeUtil();
+            String crcCode = nativeUtil.getCrc32Digest(filePath);
+            attachment.setFileCheckCode(crcCode);
             attachmentService.createAttachment(attachment);
         }
         return ResultUtil.success(messageId);

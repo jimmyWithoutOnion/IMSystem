@@ -1,8 +1,6 @@
 package com.huawei.kunpengimsystem.controller;
 
 import com.huawei.kunpengimsystem.entity.Contact;
-import com.huawei.kunpengimsystem.entity.Conversation;
-import com.huawei.kunpengimsystem.entity.Participant;
 import com.huawei.kunpengimsystem.entity.User;
 import com.huawei.kunpengimsystem.service.ContactService;
 import com.huawei.kunpengimsystem.service.UserService;

@@ -20,8 +20,7 @@ public class LoginController {
     public Result checkLogin(String username, String password) {
         NativeUtil nativeUtil = new NativeUtil();
         String encryptedPassword = nativeUtil.getSha256Digest(password);
-        System.out.print(encryptedPassword);
-        User user = userService.login(username, password);
+        User user = userService.login(username, encryptedPassword);
         if (user == null) {
             return ResultUtil.fail("用户名或密码不正确");
         } else {
