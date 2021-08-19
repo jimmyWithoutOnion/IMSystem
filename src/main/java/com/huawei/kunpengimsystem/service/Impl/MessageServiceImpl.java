@@ -1,7 +1,8 @@
-package com.huawei.kunpengimsystem.service;
+package com.huawei.kunpengimsystem.service.Impl;
 
 import com.huawei.kunpengimsystem.entity.Message;
 import com.huawei.kunpengimsystem.mapper.MessageMapper;
+import com.huawei.kunpengimsystem.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;

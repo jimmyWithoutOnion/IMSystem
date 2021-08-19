@@ -1,14 +1,15 @@
-package com.huawei.kunpengimsystem.service;
+package com.huawei.kunpengimsystem.service.Impl;
 
 import com.huawei.kunpengimsystem.entity.Participant;
 import com.huawei.kunpengimsystem.mapper.ParticipantMapper;
+import com.huawei.kunpengimsystem.service.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service("ParticipantService")
 @Transactional
-public class ParticipantServiceImpl implements ParticipantService{
+public class ParticipantServiceImpl implements ParticipantService {
     @Autowired
     private ParticipantMapper participantMapper;
 
