@@ -126,11 +126,13 @@ public class ChatController {
             // 创建attachment入库
             Attachment attachment = new Attachment();
             attachment.setMessageId(message.getId());
-            String filePath = message.getMessageContext();
-            attachment.setFileAddress(filePath);
+//            String webResourcePath = message.getMessageContext();
+            String webResourcePath =  "http://172.35.161.97:8081/chat/images/chat-img/1629376187437.png";
+            String filePath = webResourcePath.substring(webResourcePath.lastIndexOf("/") + 1);
+            attachment.setFileAddress(path + filePath);
             // 添加crc校验码
             NativeUtil nativeUtil = new NativeUtil();
-            String crcCode = nativeUtil.getCrc32Digest(filePath);
+            String crcCode = nativeUtil.getCrc32Digest(path + path);
             attachment.setFileCheckCode(crcCode);
             attachmentService.createAttachment(attachment);
         }
