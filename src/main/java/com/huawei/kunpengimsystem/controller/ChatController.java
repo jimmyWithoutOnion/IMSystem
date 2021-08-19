@@ -126,8 +126,7 @@ public class ChatController {
             // 创建attachment入库
             Attachment attachment = new Attachment();
             attachment.setMessageId(message.getId());
-//            String webResourcePath = message.getMessageContext();
-            String webResourcePath =  "http://172.35.161.97:8081/chat/images/chat-img/1629376187437.png";
+            String webResourcePath = message.getMessageContext();
             String filePath = webResourcePath.substring(webResourcePath.lastIndexOf("/") + 1);
             attachment.setFileAddress(path + filePath);
             // 添加crc校验码
