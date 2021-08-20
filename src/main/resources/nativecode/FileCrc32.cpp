@@ -2,7 +2,6 @@
 
 #include <string>
 #include <cassert>
-#include <iostream>
 #include <sstream>
 #include <iomanip>
 
@@ -58,9 +57,6 @@ std::string FileCrc32::GetFileCrc(const std::string &filePath)
 
 	int fileLength = inFile.tellg();
 
-	std::cout << std::dec;
-	std::cout << "Length of this file is:" << fileLength << std::endl;
-
 	inFile.seekg(0, std::ios::beg);
 
 #ifdef __linux__
@@ -71,7 +67,6 @@ std::string FileCrc32::GetFileCrc(const std::string &filePath)
 	{
 		inFile >> unChar;
 		crc = Crc32_u8(crc, unChar);
-		std::cout << i << "    " << unChar << std ::endl;
 	}
 	
 	inFile.close();
