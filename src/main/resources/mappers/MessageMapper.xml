@@ -22,11 +22,26 @@
         INSERT INTO `messages` (`conversation_id`,
         `sender_id`,
         `message_type`,
-        `message_context`)
+        `message_context`,
+        `create_time`)
         VALUES (#{message.conversationId},
         #{message.senderId},
         #{message.messageType},
-        #{message.messageContext})
+        #{message.messageContext},
+        #{message.createTime})
+    </insert>
+
+    <insert id="createMockMessage" parameterType="Message" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `messages` (`conversation_id`,
+        `sender_id`,
+        `message_type`,
+        `message_context`,
+        `create_time`)
+        VALUES (#{message.conversationId},
+        #{message.senderId},
+        #{message.messageType},
+        #{message.messageContext},
+        #{message.createTime})
     </insert>
 
     <delete id="deleteMessageById">

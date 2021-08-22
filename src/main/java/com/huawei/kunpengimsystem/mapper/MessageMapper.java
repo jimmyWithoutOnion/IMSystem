@@ -43,6 +43,14 @@ public interface MessageMapper {
     int createMessage(@Param("message") Message message);
 
     /**
+     * 创建假数据
+     *
+     * @param message 消息
+     * @return 成功 - {@code 1} 失败- {@code 0}
+     */
+    int createMockMessage(@Param("message") Message message);
+
+    /**
      * 根据id删除消息
      *
      * @param id 主键

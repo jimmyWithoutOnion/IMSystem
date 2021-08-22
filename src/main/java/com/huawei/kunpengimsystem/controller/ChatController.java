@@ -169,4 +169,11 @@ public class ChatController {
 
         return ResultUtil.success(destList);
     }
+
+
+    @RequestMapping("/createMockMessage")
+    public Result createMockMessage(Message message) {
+        messageService.createMessage(message);
+        return ResultUtil.success(message.getId());
+    }
 }

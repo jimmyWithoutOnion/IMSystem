@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="http://mockjs.com/dist/mock.js" type="text/javascript"></script>
+</head>
+<body>
+<script type="text/javascript">
+    for (let i=0; i < 10; i++) {
+
+        let data = Mock.mock({
+            "conversationId|1-2":1,
+            "senderId|1-2":1,
+            "messageType":"text",
+            "messageContext":"@csentence",
+            "createTime":"@datetime"
+        })
+        console.log(data)
+
+    }
+
+</script>
+</body>
+</html>

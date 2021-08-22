@@ -22,6 +22,7 @@ public enum ResultEnum {
     INTERNAL_SERVER_ERROR(1003);
 
     public int code;
+
     ResultEnum(int code) {
         this.code = code;
     }
