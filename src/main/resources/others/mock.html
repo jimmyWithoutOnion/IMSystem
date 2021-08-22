@@ -7,7 +7,7 @@
 </head>
 <body>
 <script type="text/javascript">
-    for (let i=0; i < 10; i++) {
+    for (let i=0; i < 1000; i++) {
 
         let data = Mock.mock({
             "conversationId|1-2":1,
@@ -16,9 +16,30 @@
             "messageContext":"@csentence",
             "createTime":"@datetime"
         })
-        console.log(data)
+        
+
+        let xmlHttp = new XMLHttpRequest();
+        // console.log(data.conversationId)
+        let url = "http://localhost:18080/api/chat/createMockMessage?conversationId=" + data.conversationId + "&senderId=" + data.senderId + "&messageType=" + data.messageType + "&messageContext=" + data.messageContext + "&createTime=" + data.createTime
+        console.log(url)
+
+        xmlHttp.open("GET", url, true);
+        xmlHttp.send(null);
+
 
     }
+
+    // //定义callback 函数
+    // var myCallbackFunction = function(data){
+    //         // 对返回的数据做后续处理
+    //         alert('uuu:'+JSON.stringify(data));
+    //     }
+    // //把callback函数赋给window对象，供script回调   
+    // window.myCallbackFunction = myCallbackFunction;
+    // //创建并加载script
+    // var script = document.createElement('script');
+    // script.src = 'http://localhost:18080/api/chat/createMockMessage';
+    // document.body.appendChild(script);
 
 </script>
 </body>
