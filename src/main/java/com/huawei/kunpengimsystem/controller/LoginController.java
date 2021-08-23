@@ -19,7 +19,13 @@ public class LoginController {
     @RequestMapping("/checkLogin")
     public Result checkLogin(String username, String password) {
         NativeUtil nativeUtil = new NativeUtil();
-        String encryptedPassword = nativeUtil.getSha256Digest(password);
+        // 调用jni时间接口
+        nativeUtil.getTimeMs();
+        String encryptedPassword = password;
+        if (password != null) {
+            // 调用jniSha256的接口
+            encryptedPassword = nativeUtil.getSha256Digest(password);
+        }
         User user = userService.login(username, encryptedPassword);
         if (user == null) {
             return ResultUtil.fail("用户名或密码不正确");
