@@ -5,7 +5,11 @@
 #include <sstream>
 #include <iomanip>
 
+#ifndef __x86_64__
+#ifndef __aarch64__
 bool FileCrc32::tableCreated = false;
+#endif
+#endif
 
 FileCrc32::FileCrc32()
 {
