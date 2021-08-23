@@ -5,13 +5,12 @@
 #include <sstream>
 #include <iomanip>
 
-#ifndef __x86_64__
-#ifndef __aarch64__
-
 bool FileCrc32::tableCreated = false;
 
 FileCrc32::FileCrc32()
 {
+#ifndef __x86_64__
+#ifndef __aarch64__
 	if (!FileCrc32::tableCreated)
 	{
 		uint32_t crc;
@@ -33,15 +32,9 @@ FileCrc32::FileCrc32()
 		}
 		FileCrc32::tableCreated = true;
 	}
+#endif
+#endif
 }
-#endif
-#endif
-
-#if defined(__x86_64__) || defined(__aarch64__)
-FileCrc32::FileCrc32()
-{
-}
-#endif
 
 std::string FileCrc32::GetFileCrc(const std::string &filePath)
 {
@@ -68,7 +61,7 @@ std::string FileCrc32::GetFileCrc(const std::string &filePath)
 		inFile >> unChar;
 		crc = Crc32_u8(crc, unChar);
 	}
-	
+
 	inFile.close();
 
 	std::stringstream strCrc;
