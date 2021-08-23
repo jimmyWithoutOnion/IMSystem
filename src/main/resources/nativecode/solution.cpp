@@ -6,6 +6,10 @@
 #include <cstdint>
 #include <iostream>
 #include <cstring>
+#include <ctime>
+static const int CPU_FREQUENCY_DOUBLING = 32;  // cpu倍频
+static const int CPU_EXTERNAL_FREQUENCY = 100; // 100MHz
+static const int RATIO = 1e3;                  // 1MHz = 1000KHz
 
 static const Sha256 sha256;
 static FileCrc32 fileCrc32;
@@ -53,18 +57,34 @@ std::string GetMessageSha256Digest(const std::string &message)
     return sha256.GetHexMessageDiges(message);
 }
 
-JNIEXPORT jstring JNICALL Java_com_huawei_kunpengimsystem_utils_NativeUtil_getSha256Digest
-    (JNIEnv *env, jobject obj, jstring jstr)
+JNIEXPORT jstring JNICALL Java_com_huawei_kunpengimsystem_utils_NativeUtil_getSha256Digest(JNIEnv *env, jobject obj, jstring jstr)
 {
     std::string message = jstring2str(env, jstr);
     std::string digest = sha256.GetHexMessageDiges(message);
     return str2jstring(env, digest.c_str());
 }
 
-JNIEXPORT jstring JNICALL Java_com_huawei_kunpengimsystem_utils_NativeUtil_getCrc32Digest
-    (JNIEnv *env, jobject obj, jstring jstr)
+JNIEXPORT jstring JNICALL Java_com_huawei_kunpengimsystem_utils_NativeUtil_getCrc32Digest(JNIEnv *env, jobject obj, jstring jstr)
 {
     std::string filePath = jstring2str(env, jstr);
     std::string crc = fileCrc32.GetFileCrc(filePath);
     return str2jstring(env, crc.c_str());
+}
+
+JNIEXPORT double JNICALL Java_com_huawei_kunpengimsystem_utils_NativeUtil_getTimeMs(JNIEnv *, jobject)
+{
+#ifdef __x86_64__
+    uint32_t lo, hi;
+    __asm__ __volatile__("rdtsc";
+                         : "=a"(lo), "=d"(hi));
+    uint64_t cpuClocks = (uint64_t)hi << 32 | lo;
+    return double(cpuClocks) / CPU_FREQUENCY_DOUBLING / CPU_EXTERNAL_FREQUENCY / RATIO;
+#elif defined __aarch64__
+    uint64_t countNum;
+    __asm__ __volatile__("mrs %0, cntvct_el0"
+                         : "=r"(countNum));
+    return double(countNum) / CPU_EXTERNAL_FREQUENCY / RATIO;
+#else
+    return clock() / CLOCKS_PER_SEC * 1000;
+#endif
 }

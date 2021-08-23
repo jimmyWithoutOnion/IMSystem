@@ -23,6 +23,14 @@ JNIEXPORT jstring JNICALL Java_com_huawei_kunpengimsystem_utils_NativeUtil_getSh
 JNIEXPORT jstring JNICALL Java_com_huawei_kunpengimsystem_utils_NativeUtil_getCrc32Digest
   (JNIEnv *, jobject, jstring);
 
+/*
+ * Class:     com_huawei_kunpengimsystem_utils_NativeUtil
+ * Method:    getTimeMs
+ * Signature: (Ljava/lang;)Ljava/lang;
+ */
+JNIEXPORT double JNICALL Java_com_huawei_kunpengimsystem_utils_NativeUtil_getTimeMs
+  (JNIEnv *, jobject);
+
 #ifdef __cplusplus
 }
 #endif
