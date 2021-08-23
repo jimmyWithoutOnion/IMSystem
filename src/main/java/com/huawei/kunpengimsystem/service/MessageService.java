@@ -10,4 +10,6 @@ public interface MessageService {
     int createMessage(Message message);
 
     void sendToUser(Message message);
+
+    int createMockMessage(Message message);
 }

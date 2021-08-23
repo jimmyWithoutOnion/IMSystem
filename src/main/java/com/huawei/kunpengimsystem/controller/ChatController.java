@@ -8,6 +8,7 @@ import com.huawei.kunpengimsystem.utils.Result;
 import com.huawei.kunpengimsystem.utils.ResultUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,8 +20,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.Timestamp;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -168,5 +171,21 @@ public class ChatController {
         }
 
         return ResultUtil.success(destList);
+    }
+
+    @CrossOrigin
+    @RequestMapping("/createMockMessage")
+    public Result createMockMessage(Integer conversationId, Integer senderId, String messageType, String messageContext, String createTime) {
+        Message message = new Message();
+        message.setConversationId(conversationId);
+        message.setSenderId(senderId);
+        message.setMessageType(messageType);
+        message.setMessageContext(messageContext);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//注意月份是MM
+        ParsePosition pos = new ParsePosition(0);
+        Date date = simpleDateFormat.parse(createTime, pos);
+        message.setCreateTime(date);
+        messageService.createMockMessage(message);
+        return ResultUtil.success(message.getId());
     }
 }

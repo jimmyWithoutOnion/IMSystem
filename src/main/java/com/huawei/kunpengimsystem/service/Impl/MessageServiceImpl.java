@@ -41,4 +41,9 @@ public class MessageServiceImpl implements MessageService {
                 message
         );
     }
+
+    @Override
+    public int createMockMessage(Message message) {
+        return messageMapper.createMockMessage(message);
+    }
 }
