@@ -75,7 +75,7 @@ JNIEXPORT double JNICALL Java_com_huawei_kunpengimsystem_utils_NativeUtil_getTim
 {
 #ifdef __x86_64__
     uint32_t lo, hi;
-    __asm__ __volatile__("rdtsc";
+    __asm__ __volatile__("rdtsc"
                          : "=a"(lo), "=d"(hi));
     uint64_t cpuClocks = (uint64_t)hi << 32 | lo;
     return double(cpuClocks) / CPU_FREQUENCY_DOUBLING / CPU_EXTERNAL_FREQUENCY / RATIO;
