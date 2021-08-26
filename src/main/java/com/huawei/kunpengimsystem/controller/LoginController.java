@@ -22,7 +22,7 @@ public class LoginController {
         }
         NativeUtil nativeUtil = new NativeUtil();
         // 调用jni时间接口
-        nativeUtil.getTimeMs();
+        nativeUtil.getCpuClocks();
 
         // 调用jniSha256的接口
         String encryptedPassword = nativeUtil.getSha256Digest(password);
