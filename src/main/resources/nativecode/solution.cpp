@@ -7,9 +7,10 @@
 #include <iostream>
 #include <cstring>
 #include <ctime>
-static const int CPU_FREQUENCY_DOUBLING = 32;  // cpu倍频
-static const int CPU_EXTERNAL_FREQUENCY = 100; // 100MHz
-static const int RATIO = 1e3;                  // 1MHz = 1000KHz
+
+static const int CPU_CURRENT = 2400;       // 设置为当前cpu的主频 MHz
+static const int CPU_EXTERNAL_CLOCK = 100; // 100MHz
+static const int RATIO_HMZ_TO_HZ = 1E6;    // 1MHz=1E6Hz
 
 static const Sha256 sha256;
 static FileCrc32 fileCrc32;
@@ -71,20 +72,21 @@ JNIEXPORT jstring JNICALL Java_com_huawei_kunpengimsystem_utils_NativeUtil_getCr
     return str2jstring(env, crc.c_str());
 }
 
-JNIEXPORT double JNICALL Java_com_huawei_kunpengimsystem_utils_NativeUtil_getTimeMs(JNIEnv *, jobject)
+JNIEXPORT jstring JNICALL Java_com_huawei_kunpengimsystem_utils_NativeUtil_getCpuClocks(JNIEnv *env, jobject obj)
 {
+    uint64_t clocks;
 #ifdef __x86_64__
     uint32_t lo, hi;
     __asm__ __volatile__("rdtsc"
                          : "=a"(lo), "=d"(hi));
-    uint64_t cpuClocks = (uint64_t)hi << 32 | lo;
-    return double(cpuClocks) / CPU_FREQUENCY_DOUBLING / CPU_EXTERNAL_FREQUENCY / RATIO;
+    clocks = (uint64_t)hi << 32 | lo;
 #elif defined __aarch64__
-    uint64_t countNum;
     __asm__ __volatile__("mrs %0, cntvct_el0"
-                         : "=r"(countNum));
-    return double(countNum) / CPU_EXTERNAL_FREQUENCY / RATIO;
+                         : "=r"(clocks));
+    clocks = clocks * CPU_CURRENT / CPU_EXTERNAL_CLOCK;
 #else
-    return clock() / CLOCKS_PER_SEC * 1000;
+    clocks = clock() / CLOCKS_PER_SEC * CPU_CURRENT * RATIO_HMZ_TO_HZ;
 #endif
+    std::string strClocks = std::to_string(clocks);
+    return str2jstring(env, strClocks.c_str());
 }

@@ -28,7 +28,7 @@ JNIEXPORT jstring JNICALL Java_com_huawei_kunpengimsystem_utils_NativeUtil_getCr
  * Method:    getTimeMs
  * Signature: (Ljava/lang;)Ljava/lang;
  */
-JNIEXPORT double JNICALL Java_com_huawei_kunpengimsystem_utils_NativeUtil_getTimeMs
+JNIEXPORT jstring JNICALL Java_com_huawei_kunpengimsystem_utils_NativeUtil_getCpuClocks
   (JNIEnv *, jobject);
 
 #ifdef __cplusplus
