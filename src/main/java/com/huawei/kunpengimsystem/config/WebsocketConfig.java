@@ -1,4 +1,4 @@
-package com.huawei.kunpengimsystem.Cconfig;
+package com.huawei.kunpengimsystem.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
