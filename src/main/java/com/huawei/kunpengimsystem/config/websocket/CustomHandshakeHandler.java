@@ -1,4 +1,4 @@
-package com.huawei.kunpengimsystem.config;
+package com.huawei.kunpengimsystem.config.websocket;
 
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.web.socket.WebSocketHandler;

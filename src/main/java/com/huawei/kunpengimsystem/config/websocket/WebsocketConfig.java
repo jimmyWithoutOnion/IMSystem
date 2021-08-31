@@ -1,5 +1,6 @@
-package com.huawei.kunpengimsystem.config;
+package com.huawei.kunpengimsystem.config.websocket;
 
+import com.huawei.kunpengimsystem.config.websocket.CustomHandshakeHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;

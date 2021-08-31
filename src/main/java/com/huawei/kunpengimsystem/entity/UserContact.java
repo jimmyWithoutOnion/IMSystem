@@ -2,7 +2,6 @@ package com.huawei.kunpengimsystem.entity;
 
 import lombok.*;
 
-import java.io.Serializable;
 import java.util.Date;
 
 @Data
@@ -11,8 +10,7 @@ import java.util.Date;
 @Builder
 @Getter
 @Setter
-public class UserContact implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class UserContact {
 
     /**
      * 主键 用户id
